@@ -4,6 +4,7 @@ var path = require('path');
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
+var STYLE_PATH = path.resolve(ROOT_PATH, 'style');
 module.exports = {
     //项目的文件夹 可以直接用文件夹名称 默认会找index.js 也可以确定是哪个文件名字
     entry: APP_PATH,
@@ -18,6 +19,17 @@ module.exports = {
         inline: true,//实时刷新
         port: 3030,
         // progress: ture,
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.less$/,
+                loaders: [
+                    'style-loader', 'css-loader', 'less-loader'
+                ],
+                include: STYLE_PATH
+            }
+        ]
     },
 
     //添加我们的插件 会自动生成一个html文件
